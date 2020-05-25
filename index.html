@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        const flag = 1; // Set 1 to test
+        const handSigns = ['Rock', 'Paper', 'Scissors'];
+
+        const getNumOfHandSigns = () => {
+            return handSigns.length;
+        }
+
+        const getRandNum = () => {
+            const numRange = getNumOfHandSigns();
+            const randNum = Math.floor(Math.random() * numRange);
+            return randNum;
+        }
+
+        const getHandSign = () => {
+            return handSigns[getRandNum()];
+        }
+
+        const getComputerSelection = () => {
+            return getHandSign();
+        }
+
+        const getPlayerSelection = () => {
+            let playerSelection;
+            if (flag == 0) {
+                playerSelection = prompt('Rock, Paper, or Scissors');
+            } else if (flag == 1) {
+                playerSelection = getComputerSelection();
+            }
+
+            playerSelection = playerSelection.toLowerCase();
+            playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1);
+            return playerSelection;
+        }
+
+        const getWinner = (player, computer) => {
+            let computerWin = 'Computer';
+            let playerWin = 'Player';
+            let noWin = 'Nobody';
+            if (computer === 'Rock' && player === "Paper") {
+                return playerWin;
+            } else if (computer === 'Rock' && player === 'Scissors') {
+                return computerWin;
+            } else if (computer === 'Paper' && player === 'Rock') {
+                return computerWin;
+            } else if (computer === 'Paper' && player === 'Scissors') {
+                return playerWin;
+            } else if (computer === 'Scissors' && player === 'Rock') {
+                return playerWin;
+            } else if (computer === 'Scissors' && player === 'Paper') {
+                return computerWin;
+            } else {
+                return noWin;
+            }
+        }
+
+        const playRound = () => {
+            const playerSelection = getPlayerSelection();
+            const computerSelection = getComputerSelection();
+            const winner = getWinner(playerSelection, computerSelection);
+            console.log(`Player==[  ${playerSelection}  vs  ${computerSelection}  ]==Computer`)
+            console.log(`${winner} wins round`);
+            return winner;
+        }
+
+        const playGame = () => {
+            let playerScore = 0;
+            let computerScore = 0;
+            let nobodyScore = 0;
+            for (let i = 0; i < 5; i++) {
+                let winner = playRound();
+                if (winner === 'Player') {
+                    playerScore++;
+                } else if (winner === 'Computer') {
+                    computerScore++;
+                } else if (winner === 'Nobody') {
+                    nobodyScore++;
+                }
+            }
+            console.log(`SCORES[ Player: ${playerScore}  Computer: ${computerScore}  Nobody: ${nobodyScore} ]SCORES`);
+            let gameWinner;
+            if (playerScore > computerScore) {
+                gameWinner = 'Player';
+            } else if (playerScore < computerScore) {
+                gameWinner = 'Computer';
+            } else {
+                gameWinner = 'Nobody';
+            }
+            console.log(`${gameWinner} wins the game!`);
+        }
+        playGame();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

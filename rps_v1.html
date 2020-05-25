@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            // Set array of possible hand signs
+            const handSigns = ['Rock', 'Paper', 'Scissors'];
+
+            // Return the number of possible hand signs
+            const getNumOfHandSigns = () => handSigns.length;
+
+            // Return a random hand sign number
+            const getRandomNum = () => {
+                return Math.floor(Math.random() * getNumOfHandSigns());
+            }
+
+            // Return hand sign name
+            const getRandomHandSign = () => {
+                return handSigns[getRandomNum()];
+            }
+
+            // Return player selection from prompt
+            const getPlayerSelection = () => {
+                const playerSelection = prompt("Rock, Paper, or Scissors");
+                playerSelection = playerSelection.toLowerCase();
+                playerSelection = playerSelection[0].toUpperCase + playerSelection.slice(1); 
+                return playerSelection;
+            }
+
+            // Return computer's random hand sign name
+            const getComputerSelection = () => getRandomHandSign();
+            
+            // Compare computer and player's hand signs
+            const compareHands = (computer, player) => {
+                let computerWin = 1;
+                let playerWin = 1;
+                let noWin = 1;
+                if (computer === 'Rock' && player === "Paper") {
+                    return playerWin;
+                } else if (computer === 'Rock' && player === 'Scissors') {
+                    return computerWin;
+                } else if (computer === 'Paper' && player === 'Rock') {
+                    return computerWin;
+                } else if (computer === 'Paper' && player === 'Scissors') {
+                    return playerWin;
+                } else if (computer === 'Scissors' && player === 'Rock') {
+                    return playerWin;
+                } else if (computer === 'Scissors' && player === 'Paper') {
+                    return computerWin;
+                } else {
+                    return noWin;
+                }
+            }
+            
+                
+            const playRound = (computer, player) => {
+                const result = compareHands(computer, player);
+                return result;
+            }
+            const computerChoice = getComputerSelection();
+            //const playerChoice = getPlayerSelection();
+
+            const game = () => {
+                for (let i = 0; i < 5; i++) {
+                    const computerChoice = getComputerSelection();
+                    const playerChoice = getPlayerSelection();
+                    playRound(computerChoice, playerChoice);
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <a href="#" onclick="game()">Play Game</a>
+    </body>
+</html>
